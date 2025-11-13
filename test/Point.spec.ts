@@ -1,7 +1,6 @@
 import "mocha";
 import { expect } from "chai";
 import Point from "../src/Point";
-import Coordinate from "../src/Coordinate";
 
 describe("test Point", () => {
 
@@ -19,6 +18,7 @@ describe("test Point", () => {
         expect(p.x()).to.equal(3.0);
         expect(p.y()).to.equal(4.0);
         expect(p.isEmpty()).to.equal(false);
+
     });
 });
 

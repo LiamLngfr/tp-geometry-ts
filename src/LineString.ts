@@ -13,7 +13,7 @@ export default class LineString implements Geometry{
     }
 
     getNumPoints():number{
-        return this.points ? this.points.length : 0;
+        return this.points.length;
     }
 
     getPointN(n:number): Point{
@@ -25,6 +25,12 @@ export default class LineString implements Geometry{
     }
 
     isEmpty(): boolean {
-        return this.points.length == 0 ? true : false
+        return this.points.length == 0;
+    }
+
+    translate(dx: number, dy: number) {
+        for(let point of this.points){
+            point.translate(dx,dy);
+        }
     }
 }
