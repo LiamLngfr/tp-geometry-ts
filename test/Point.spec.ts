@@ -36,5 +36,20 @@ describe("test Point", () => {
         expect(copy.x()).to.deep.equal(-1);
         expect(copy.y()).to.deep.equal(-1)
     });
+
+    it("envelope creation", () => {
+        const p1 = new Point([-1,-1]);
+        const e = p1.getEnvelope();
+        expect(e.isEmpty()).to.equal(false);
+        expect(e.toString()).to.deep.equal("[-1,-1,-1,-1]");
+    });
+
+    it("empty envelope creation", ()=>{
+        const p1 = new Point();
+        const e = p1.getEnvelope();
+        expect(e.isEmpty()).to.equal(true);
+        expect(e.toString()).to.deep.equal("[undefined,undefined,undefined,undefined]")
+        expect(isFinite(e.getXmax())).to.equal(false);
+    })
 });
 

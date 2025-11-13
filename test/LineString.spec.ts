@@ -49,4 +49,14 @@ describe("test LineString", ()=> {
         expect(copy.getPointN(0).y()).to.deep.equal(-1);
     });
 
+    it("envelope creation", () => {
+        const p1 = new Point([-1,-1])
+        const p2 = new Point([2,1]);
+        const ls = new LineString([p1,p2]);
+        const e = ls.getEnvelope()
+        expect(e.isEmpty()).to.equal(false);
+        expect(e.toString()).to.deep.equal("[-1,-1,2,1]")
+
+    });
+
 })

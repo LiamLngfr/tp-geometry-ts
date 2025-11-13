@@ -1,3 +1,5 @@
+import Envelope from "./Envelope";
+import EnvelopeBuilder from "./EnvelopeBuilder";
 import Geometry from "./Geometry";
 import Point from "./Point";
 
@@ -44,5 +46,13 @@ export default class LineString implements Geometry {
             }
             return new LineString(lPoints)
         }
+    }
+
+    getEnvelope(): Envelope {
+        const eb = new EnvelopeBuilder();
+        for(let point of this.points) {
+            eb.insert(point.getCoordinate())
+        }
+        return eb.build()
     }
 }
