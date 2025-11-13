@@ -5,14 +5,10 @@ export default class LineString implements Geometry{
     private points: Array<Point>;
 
     constructor(points?: Array<Point>){
-        if (points){
-            if (points.length <= 1){
-                this.points = []
-            } else {
-                this.points = points
-            }
-        } else {
+        if (!points || points.length <= 1){
             this.points = []
+        } else {
+            this.points = points
         }
     }
 
@@ -26,5 +22,9 @@ export default class LineString implements Geometry{
 
     getType(): string{
         return "LineString";
+    }
+
+    isEmpty(): boolean {
+        return this.points.length == 0 ? true : false
     }
 }
