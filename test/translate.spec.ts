@@ -3,7 +3,7 @@ import { expect } from "chai";
 import Point from "../src/Point";
 import LineString from "../src/LineString";
 
-describe("test Point", () => {
+describe("test Translate", () => {
     it("translate empty", ()=>{
         var p1 = new Point();
         var p2 = new Point();
