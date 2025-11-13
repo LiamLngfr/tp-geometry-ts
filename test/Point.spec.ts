@@ -1,13 +1,16 @@
 import "mocha";
 import { expect } from "chai";
 import Point from "../src/Point";
+import Coordinate from "../src/Coordinate";
 
 describe("test Point", () => {
+
     it("test default constructor", () => {
         const p = new Point();
         expect(p.getCoordinate()).to.equal(undefined);
         expect(Number.isNaN(p.x()));
         expect(Number.isNaN(p.y()));
+        expect(p.getType()).to.equal("Point");
     });
     it("test constructor with coordinates", () => {
         const p = new Point([3.0,4.0]);
