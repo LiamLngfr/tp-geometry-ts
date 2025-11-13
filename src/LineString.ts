@@ -1,26 +1,26 @@
 import Geometry from "./Geometry";
 import Point from "./Point";
 
-export default class LineString implements Geometry{
+export default class LineString implements Geometry {
     private points: Array<Point>;
 
-    constructor(points?: Array<Point>){
-        if (!points || points.length <= 1){
+    constructor(points?: Array<Point>) {
+        if (!points || points.length <= 1) {
             this.points = []
         } else {
             this.points = points
         }
     }
 
-    getNumPoints():number{
+    getNumPoints(): number {
         return this.points.length;
     }
 
-    getPointN(n:number): Point{
+    getPointN(n: number): Point {
         return this.points[n];
     }
 
-    getType(): string{
+    getType(): string {
         return "LineString";
     }
 
@@ -28,9 +28,21 @@ export default class LineString implements Geometry{
         return this.points.length == 0;
     }
 
-    translate(dx: number, dy: number) {
-        for(let point of this.points){
-            point.translate(dx,dy);
+    translate(dx: number, dy: number): void {
+        for (let point of this.points) {
+            point.translate(dx, dy);
+        }
+    }
+
+    clone(): LineString {
+        if (this.isEmpty()) {
+            return new LineString();
+        } else {
+            var lPoints = [];
+            for (let point of this.points) {
+                lPoints.push(point.clone())
+            }
+            return new LineString(lPoints)
         }
     }
 }

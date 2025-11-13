@@ -1,7 +1,7 @@
 import Coordinate from "./Coordinate";
 import Geometry from "./Geometry";
 
-export default class Point implements Geometry{
+export default class Point implements Geometry {
   private coordinate?: Coordinate;
 
   constructor(coordinate?: Coordinate) {
@@ -13,14 +13,14 @@ export default class Point implements Geometry{
   }
 
   x(): number {
-    return this.coordinate.length > 0 ? this.coordinate[0] : Number.NaN ;
+    return this.coordinate.length > 0 ? this.coordinate[0] : Number.NaN;
   }
 
   y(): number {
-    return this.coordinate.length > 1? this.coordinate[1] : Number.NaN ;
+    return this.coordinate.length > 1 ? this.coordinate[1] : Number.NaN;
   }
 
-  getType() : string {
+  getType(): string {
     return "Point";
   }
 
@@ -28,9 +28,13 @@ export default class Point implements Geometry{
     return this.coordinate.length < 2;
   }
 
-  translate(dx: number, dy: number) {
+  translate(dx: number, dy: number): void {
     this.coordinate[0] += dx;
     this.coordinate[1] += dy;
+  }
+
+  clone(): Point {
+    return this.isEmpty() ? new Point() : new Point([this.x(), this.y()])
   }
 
 }

@@ -30,6 +30,23 @@ describe("test LineString", ()=> {
         expect(ls.getPointN(0)).to.equal(p1);
         expect(ls.isEmpty()).to.equal(false);
     });
+    it("copy empty", () => {
+        const ls= new LineString();
+        const copy = ls.clone()
+        expect(copy.isEmpty()).to.equal(true)
 
+    })
+
+    it("copy not empty", () => {
+        const p1 = new Point([-1,-1])
+        const p2 = new Point([2,1]);
+        const ls = new LineString([p1,p2]);
+        const copy = ls.clone();
+        ls.translate(1,2);
+        expect(ls.getPointN(0).x()).to.deep.equal(0);
+        expect(ls.getPointN(0).y()).to.deep.equal(1);
+        expect(copy.getPointN(0).x()).to.deep.equal(-1);
+        expect(copy.getPointN(0).y()).to.deep.equal(-1);
+    });
 
 })

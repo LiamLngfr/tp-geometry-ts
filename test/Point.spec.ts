@@ -20,5 +20,21 @@ describe("test Point", () => {
         expect(p.isEmpty()).to.equal(false);
 
     });
+
+    it("copy empty", () => {
+        const p = new Point();
+        const copy = p.clone();
+        expect(copy.isEmpty()).to.equal(true)
+    });
+
+    it("copy not empty", () => {
+        const p = new Point([-1,-1])
+        const copy = p.clone()
+        p.translate(1,1);
+        expect(p.x()).to.deep.equal(0);
+        expect(p.y()).to.deep.equal(0);
+        expect(copy.x()).to.deep.equal(-1);
+        expect(copy.y()).to.deep.equal(-1)
+    });
 });
 
