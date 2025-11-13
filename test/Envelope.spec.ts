@@ -11,13 +11,14 @@ describe("test Envelope", () => {
         var eb = new EnvelopeBuilder();
         eb.insert([1,2]);
         eb.insert([4,5]);
+        eb.insert([-1,-2])
         var e = eb.build();
         expect(e.isEmpty()).to.equal(false);
         expect(e.getXmax()).to.deep.equal(4);
         expect(e.getYmax()).to.deep.equal(5);
-        expect(e.getXmin()).to.deep.equal(1);
-        expect(e.getYmin()).to.deep.equal(2);
-        expect(e.toString()).to.deep.equal("[1,2,4,5");
+        expect(e.getXmin()).to.deep.equal(-1);
+        expect(e.getYmin()).to.deep.equal(-2);
+        expect(e.toString()).to.deep.equal("[-1,-2,4,5]");
         
     });
 
@@ -30,6 +31,9 @@ describe("test Envelope", () => {
     it("Envelope empty", () => {
         var e = new Envelope();
         expect(e.isEmpty()).to.equal(true);
+        var eb = new EnvelopeBuilder();
+        e = eb.build();
+        expect(e.isEmpty()).to.equal(true)
     });
 
 
