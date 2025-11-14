@@ -9,7 +9,7 @@ export default abstract class AbstractGeometry implements Geometry {
     abstract translate(dx: number, dy: number): void;
     abstract clone(): Geometry;
     abstract getEnvelope(): Envelope;
-    abstract accept(visitor: GeometryVisitor): string;
+    abstract accept<ResultType>(visitor: GeometryVisitor<ResultType>): ResultType;
 
 
     asText(): string {

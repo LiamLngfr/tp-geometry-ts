@@ -48,10 +48,8 @@ export default class Point extends AbstractGeometry {
 
   }
 
-  accept(visitor: GeometryVisitor): string {
+  accept<ResultType>(visitor: GeometryVisitor<ResultType>): ResultType {
     return visitor.visitPoint(this);
   }
-
-
 
 }

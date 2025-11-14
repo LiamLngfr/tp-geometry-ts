@@ -2,18 +2,16 @@ import GeometryVisitor from "./GeometryVisitor";
 import LineString from "./LineString";
 import Point from "./Point";
 
-export default class WktVisitor implements GeometryVisitor {
-    //private buffer : string;
+export default class WktVisitor implements GeometryVisitor<string> {
 
     visitPoint(point: Point): string {
         if (!point.isEmpty()) {
             const coord = point.getCoordinate();
             const x = coord[0];
-            const y = coord[1];
-
+            const y = coord[1];     
             return "POINT(" + x + " " + y + ")";
         } else {
-            return "POINT EMPTY"
+            return "POINT EMPTY";
         }
     }
 
@@ -41,9 +39,5 @@ export default class WktVisitor implements GeometryVisitor {
             return "LINESTRING EMPTY"
         }
     }
-
-    // getResult():string {
-    //     return this.buffer;
-    // }
 
 }

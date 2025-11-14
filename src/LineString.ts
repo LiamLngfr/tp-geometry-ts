@@ -59,10 +59,9 @@ export default class LineString extends AbstractGeometry {
         return eb.build()
     }
 
-    accept(visitor: GeometryVisitor): string {
-        return visitor.visitLineString(this)
+    accept<ResultType>(visitor: GeometryVisitor<ResultType>): ResultType {
+        return visitor.visitLineString(this);
     }
-
     
 
 }

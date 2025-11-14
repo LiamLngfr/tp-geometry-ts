@@ -1,6 +1,7 @@
 import Coordinate from "./Coordinate";
 import Envelope from "./Envelope";
 
+
 export default class EnvelopeBuilder {
     private points: Array<Coordinate> = [];
     insert(coordinate: Coordinate) {
