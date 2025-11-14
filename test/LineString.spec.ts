@@ -2,6 +2,7 @@ import "mocha";
 import { expect } from "chai";
 import LineString from "../src/LineString";
 import Point from "../src/Point";
+import WktWriter from "../src/WktWriter";
 
 describe("test LineString", ()=> {
     it("test default constructor", ()=>{
@@ -57,6 +58,16 @@ describe("test LineString", ()=> {
         expect(e.isEmpty()).to.equal(false);
         expect(e.toString()).to.deep.equal("[-1,-1,2,1]")
 
+    });
+
+    it("wkt writer creation", () => {
+        const p1 = new Point([1.0,0.0]);
+        const p2 = new Point([2.4,3.9]);
+        const ls1 = new LineString([p1, p2])
+        const ls2 = new LineString()
+        const w = new WktWriter();
+        expect(w.write(ls1)).to.deep.equal("LINESTRING(1 0,2.4 3.9)")
+        expect(w.write(ls2)).to.deep.equal("LINESTRING EMPTY")
     });
 
 })

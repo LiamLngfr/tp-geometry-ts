@@ -1,6 +1,8 @@
 import "mocha";
 import { expect } from "chai";
 import Point from "../src/Point";
+import WktWriter from "../src/WktWriter";
+
 
 describe("test Point", () => {
 
@@ -50,6 +52,16 @@ describe("test Point", () => {
         expect(e.isEmpty()).to.equal(true);
         expect(e.toString()).to.deep.equal("[undefined,undefined,undefined,undefined]")
         expect(isFinite(e.getXmax())).to.equal(false);
-    })
+    });
+
+    it("wkt writer creation", () => {
+        const p1 = new Point([1.0,0.0]);
+        const p2 = new Point();
+        const w = new WktWriter();
+        expect(w.write(p1)).to.deep.equal("POINT(1 0)")
+        expect(w.write(p2)).to.deep.equal("POINT EMPTY")
+
+
+    });
 });
 
