@@ -4,6 +4,7 @@ import LineString from "../src/LineString";
 import Point from "../src/Point";
 import WktWriter from "../src/WktWriter";
 import LogGeometryVisitor from "../src/LogGeometryVisitor";
+import WktVisitor from "../src/WktVisitor"
 
 describe("test LineString", ()=> {
     it("test default constructor", ()=>{
@@ -71,6 +72,19 @@ describe("test LineString", ()=> {
         expect(w.write(ls2)).to.deep.equal("LINESTRING EMPTY")
     });
 
+    it("WktVisitor creation", () => {
+        const p1 = new Point([1.0,0.0]);
+        const p2 = new Point([2.4,3.9]);
+        const ls1 = new LineString([p1, p2])
+        const ls2 = new LineString();
+        const wktVisitor = new WktVisitor();
+        ls1.accept(wktVisitor)
+        expect(wktVisitor.getResult()).to.deep.equal("LINESTRING(1 0,2.4 3.9)");
+        ls2.accept(wktVisitor)
+        expect(wktVisitor.getResult()).to.deep.equal("LINESTRING EMPTY");
+    });
+
+
     it("LogGeometryVisitor creation", () => {
         const p1 = new Point([1.0,0.0]);
         const p2 = new Point([2.4,3.9]);
@@ -81,4 +95,5 @@ describe("test LineString", ()=> {
         expect(ls2.accept(lgv)).to.deep.equal("Je suis une polyligne vide");
 
     });
-})
+
+});

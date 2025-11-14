@@ -3,6 +3,7 @@ import { expect } from "chai";
 import Point from "../src/Point";
 import WktWriter from "../src/WktWriter";
 import LogGeometryVisitor from "../src/LogGeometryVisitor"
+import WktVisitor from "../src/WktVisitor"
 
 
 describe("test Point", () => {
@@ -61,6 +62,18 @@ describe("test Point", () => {
         const w = new WktWriter();
         expect(w.write(p1)).to.deep.equal("POINT(1 0)")
         expect(w.write(p2)).to.deep.equal("POINT EMPTY")
+
+
+    });
+
+    it("WktVisitor creation", () => {
+        const p1 = new Point([1.0,0.0]);
+        const p2 = new Point();
+        const wktVisitor = new WktVisitor();
+        p1.accept(wktVisitor);
+        expect(wktVisitor.getResult()).to.deep.equal("POINT(1 0)");
+        p2.accept(wktVisitor)
+        expect(wktVisitor.getResult()).to.deep.equal("POINT EMPTY");
 
 
     });
