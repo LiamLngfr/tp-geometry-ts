@@ -5,6 +5,8 @@ import Point from "../src/Point";
 import WktWriter from "../src/WktWriter";
 import LogGeometryVisitor from "../src/LogGeometryVisitor";
 import WktVisitor from "../src/WktVisitor"
+import EnvelopeBuilder from "../src/EnvelopeBuilder";
+import GeometryWithCachedEnvelope from "../src/GeometryWithCachedEnvelope"
 
 describe("test LineString", () => {
     it("test default constructor", () => {
@@ -53,7 +55,7 @@ describe("test LineString", () => {
     });
 
     it("envelope creation", () => {
-        const p1 = new Point([-1, -1])
+        const p1 = new Point([-1, -1]);
         const p2 = new Point([2, 1]);
         const ls = new LineString([p1, p2]);
         const e = ls.getEnvelope()
@@ -61,6 +63,16 @@ describe("test LineString", () => {
         expect(e.toString()).to.deep.equal("[-1,-1,2,1]")
 
     });
+
+    it("envelope builder as visitor ", () => {
+        const p1 = new Point([-1, -1]);
+        const p2 = new Point([2, 1]);
+        const ls = new LineString([p1, p2]);
+        const eb = new EnvelopeBuilder();
+        ls.accept(eb)
+        expect(eb.build().toString()).to.deep.equal("[-1,-1,2,1]")
+    });
+
 
     it("wkt writer creation", () => {
         const p1 = new Point([1.0, 0.0]);
@@ -98,9 +110,20 @@ describe("test LineString", () => {
     it("asText use", () => {
         const p1 = new Point([1.0, 0.0]);
         const p2 = new Point([2.4, 3.9]);
-        const ls1 = new LineString([p1, p2])
+        const ls1 = new LineString([p1, p2]);
         expect(ls1.asText()).to.deep.equal("LINESTRING(1 0,2.4 3.9)");
     });
+
+    it("GeomWithCachedEnvelope construct ", () => {
+        const p1 = new Point([1.0, 0.0]);
+        const p2 = new Point([2.4, 3.9]);
+        const ls1 = new LineString([p1, p2]);
+        var g = new GeometryWithCachedEnvelope(ls1);
+        const a = g.getEnvelope();
+        const b = g.getEnvelope();
+        expect(a.toString()).to.deep.equal("[1,0,2.4,3.9]");
+        expect(a).to.deep.equal(b);
+    })
 
 
 });

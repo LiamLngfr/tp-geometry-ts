@@ -4,6 +4,7 @@ import Point from "../src/Point";
 import WktWriter from "../src/WktWriter";
 import LogGeometryVisitor from "../src/LogGeometryVisitor"
 import WktVisitor from "../src/WktVisitor"
+import EnvelopeBuilder from "../src/EnvelopeBuilder";
 
 
 describe("test Point", () => {
@@ -56,6 +57,17 @@ describe("test Point", () => {
         expect(isFinite(e.getXmax())).to.equal(false);
     });
 
+
+    it("envelope builder as visitor ", () => {
+        const p1 = new Point([1,1]);
+        const eb = new EnvelopeBuilder();
+        p1.accept(eb);
+        expect(eb.build().toString()).to.deep.equal("[1,1,1,1]")
+        const p2 = new Point([2,3]);
+        p2.accept(eb);
+        expect(eb.build().toString()).to.deep.equal("[1,1,2,3]") 
+    })
+
     it("wkt writer creation", () => {
         const p1 = new Point([1.0,0.0]);
         const p2 = new Point();
@@ -90,5 +102,7 @@ describe("test Point", () => {
         const p1 = new Point([1,0]);
         expect(p1.asText()).to.deep.equal("POINT(1 0)")
     });
+
+
 });
 
