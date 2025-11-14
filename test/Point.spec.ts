@@ -2,6 +2,7 @@ import "mocha";
 import { expect } from "chai";
 import Point from "../src/Point";
 import WktWriter from "../src/WktWriter";
+import LogGeometryVisitor from "../src/LogGeometryVisitor"
 
 
 describe("test Point", () => {
@@ -62,6 +63,15 @@ describe("test Point", () => {
         expect(w.write(p2)).to.deep.equal("POINT EMPTY")
 
 
+    });
+
+
+    it("LogGeometryVisitor creation", () => {
+        const p1 = new Point([1,5]);
+        const p2 = new Point();
+        const lgv = new LogGeometryVisitor();
+        expect(p1.accept(lgv)).to.deep.equal("Je suis un point avec x=1 et y=5");
+        expect(p2.accept(lgv)).to.deep.equal("Je suis un point vide");
     });
 });
 

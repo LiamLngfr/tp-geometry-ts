@@ -3,6 +3,7 @@ import { expect } from "chai";
 import LineString from "../src/LineString";
 import Point from "../src/Point";
 import WktWriter from "../src/WktWriter";
+import LogGeometryVisitor from "../src/LogGeometryVisitor";
 
 describe("test LineString", ()=> {
     it("test default constructor", ()=>{
@@ -70,4 +71,14 @@ describe("test LineString", ()=> {
         expect(w.write(ls2)).to.deep.equal("LINESTRING EMPTY")
     });
 
+    it("LogGeometryVisitor creation", () => {
+        const p1 = new Point([1.0,0.0]);
+        const p2 = new Point([2.4,3.9]);
+        const ls1 = new LineString([p1,p2]);
+        const ls2 = new LineString() 
+        const lgv = new LogGeometryVisitor();
+        expect(ls1.accept(lgv)).to.deep.equal("Je suis une polyligne définie par 2 points");
+        expect(ls2.accept(lgv)).to.deep.equal("Je suis une polyligne vide");
+
+    });
 })
