@@ -1,13 +1,15 @@
 import Envelope from "./Envelope";
 import EnvelopeBuilder from "./EnvelopeBuilder";
 import Geometry from "./Geometry";
-import GeometryVisitor from "./GeomtryVisitor";
+import GeometryVisitor from "./GeometryVisitor";
 import Point from "./Point";
+import AbstractGeometry from "./AbstractGeometry";
 
-export default class LineString implements Geometry {
+export default class LineString extends AbstractGeometry {
     private points: Array<Point>;
 
     constructor(points?: Array<Point>) {
+        super();
         if (!points || points.length <= 1) {
             this.points = []
         } else {
@@ -51,13 +53,16 @@ export default class LineString implements Geometry {
 
     getEnvelope(): Envelope {
         const eb = new EnvelopeBuilder();
-        for(let point of this.points) {
+        for (let point of this.points) {
             eb.insert(point.getCoordinate())
         }
         return eb.build()
     }
 
-    accept(visitor: GeometryVisitor) : string {
+    accept(visitor: GeometryVisitor): string {
         return visitor.visitLineString(this)
     }
+
+    
+
 }

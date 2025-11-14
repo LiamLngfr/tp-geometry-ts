@@ -69,11 +69,9 @@ describe("test Point", () => {
     it("WktVisitor creation", () => {
         const p1 = new Point([1.0,0.0]);
         const p2 = new Point();
-        const wktVisitor = new WktVisitor();
-        p1.accept(wktVisitor);
-        expect(wktVisitor.getResult()).to.deep.equal("POINT(1 0)");
-        p2.accept(wktVisitor)
-        expect(wktVisitor.getResult()).to.deep.equal("POINT EMPTY");
+        const wktVisitor = new WktVisitor();        
+        expect(p1.accept(wktVisitor)).to.deep.equal("POINT(1 0)");
+        expect(p2.accept(wktVisitor)).to.deep.equal("POINT EMPTY");
 
 
     });
@@ -85,6 +83,12 @@ describe("test Point", () => {
         const lgv = new LogGeometryVisitor();
         expect(p1.accept(lgv)).to.deep.equal("Je suis un point avec x=1 et y=5");
         expect(p2.accept(lgv)).to.deep.equal("Je suis un point vide");
+    });
+
+
+    it("asText use", () => {
+        const p1 = new Point([1,0]);
+        expect(p1.asText()).to.deep.equal("POINT(1 0)")
     });
 });
 

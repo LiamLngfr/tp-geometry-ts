@@ -1,24 +1,24 @@
-import GeometryVisitor from "./GeomtryVisitor";
+import GeometryVisitor from "./GeometryVisitor";
 import LineString from "./LineString";
 import Point from "./Point";
 
-export default class LogGeometryVisitor implements GeometryVisitor{
-    visitPoint(point: Point) {
+export default class LogGeometryVisitor implements GeometryVisitor {
+    visitPoint(point: Point): string {
         var string = "Je suis un point "
-        if(point.isEmpty()){
-        string += "vide";
-        console.log(string);
-        return string;
+        if (point.isEmpty()) {
+            string += "vide";
+            console.log(string);
+            return string;
         } else {
-        string += "avec x=" + point.x() + " et y=" + point.y()
-        console.log(string);
-        return string;
+            string += "avec x=" + point.x() + " et y=" + point.y()
+            console.log(string);
+            return string;
         }
     }
 
-    visitLineString(linestring: LineString) {
+    visitLineString(linestring: LineString): string {
         var string = "Je suis une polyligne ";
-        if(linestring.isEmpty()){
+        if (linestring.isEmpty()) {
             string += "vide";
             console.log(string);
             return string;

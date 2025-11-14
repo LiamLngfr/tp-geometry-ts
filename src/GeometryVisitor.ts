@@ -3,7 +3,7 @@ import Point from "./Point";
 
 
 export default interface GeometryVisitor {
-    visitPoint(point:Point ) ;
+    visitPoint(point: Point): string;
 
-    visitLineString(linestring:LineString );
+    visitLineString(linestring: LineString): string;
 }

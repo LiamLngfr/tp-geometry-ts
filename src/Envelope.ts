@@ -10,9 +10,9 @@ export default class Envelope {
     }
 
     isEmpty() {
-        return !isFinite(this.bottomLeft[0]) && 
-            !isFinite(this.bottomLeft[1]) && 
-            !isFinite(this.topRight[0]) && 
+        return !isFinite(this.bottomLeft[0]) &&
+            !isFinite(this.bottomLeft[1]) &&
+            !isFinite(this.topRight[0]) &&
             !isFinite(this.topRight[1]);
     }
 
